@@ -1,11 +1,7 @@
-FROM nginx 
+FROM php:8.2-apache
 
-WORKDIR /app
+RUN apt-get update && apt-get install -y git
 
-COPY . /app
+RUN git clone https://github.com/ahassin96/myflix /var/www/html
 
 EXPOSE 80
-
-ENV NAME World 
-
-CMD ["nginx", "-g", "daemon off;"]
