@@ -19,7 +19,7 @@ class DbConnect {
             return $conn;
         } catch(PDOException $e) {
             echo 'Database Error: ' . $e->getMessage();
-            return null; // Handle the error appropriately in your application
+            return null; 
         }
     }
 }
