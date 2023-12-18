@@ -1,12 +1,16 @@
-<!DOCTYPE html>
 
-<?php session_start();
-
+<?php  
 require_once "connect.php";
 $conn = new DbConnect();
 $conn = $conn->connect();
+if(!isset($_SESSION["username"])){
+    header("Location:login.php");
+} 
 
 ?>
+
+<!DOCTYPE html>
+
 
 <!DOCTYPE html>
 
@@ -19,21 +23,21 @@ $conn = $conn->connect();
 		<p> this is the new text added for apache test</p>		
 		<p> second test </p>
 		<?php 
-    // SQL query
+    
 		try{
     $sql = "SELECT * FROM UserAccounts";
 
-    // Prepare the statement
+    
     $stmt = $conn->prepare($sql);
 
-    // Execute the query
+    
     $stmt->execute();
 
-    // Check if there are any rows in the result
+    
     if ($stmt->rowCount() > 0) {
-        // Fetch and display data
+        
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            // Display each column value
+            
             foreach ($row as $key => $value) {
                 echo $key . ": " . $value . "<br>";
             }
