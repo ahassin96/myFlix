@@ -1,10 +1,12 @@
 <?php
 class DbConnect{
 
- public $host = "ec2-user@ec2-52-20-195-51.compute-1.amazonaws.com"; 
- public $user = getenv('DB_USERNAME'); 
- public $password = getenv('DB_PASSWORD'); 
- public $dbname = "myflixdb"; 
+  public function __construct() {
+        $this->host = "ec2-user@ec2-52-20-195-51.compute-1.amazonaws.com";
+        $this->user = getenv('DB_USERNAME');
+        $this->password = getenv('DB_PASSWORD');
+        $this->dbname = "myflixdb";
+    }
  
 
  public function connect(){
