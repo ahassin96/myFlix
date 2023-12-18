@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <?php session_start();
 
 require_once "connect.php";
@@ -17,36 +19,33 @@ $conn = $conn->connect();
 		<p> this is the new text added for apache test</p>		
 		<p> second test </p>
 		<?php 
+    // SQL query
+		try{
+    $sql = "SELECT * FROM UserAccounts";
 
-		$sql = "SELECT * FROM UserAccounts";
-			$stmt = $pdo->prepare($sql);
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
 
-			// Execute the query
-			try {
-			    $stmt->execute();
-			    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Execute the query
+    $stmt->execute();
 
-			    // Display the results
-			    if (!empty($result)) {
-			        echo "<ul>";
-			        foreach ($result as $row) {
-			            echo "<li>";
-			            foreach ($row as $key => $value) {
-			                echo "$key: $value, ";
-			            }
-			            echo "</li>";
-			        }
-			        echo "</ul>";
-			    } else {
-			        echo "No records found";
-			    }
-			} catch (PDOException $e) {
-			    die("Query failed: " . $e->getMessage());
-			}
-			?>
+    // Check if there are any rows in the result
+    if ($stmt->rowCount() > 0) {
+        // Fetch and display data
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            // Display each column value
+            foreach ($row as $key => $value) {
+                echo $key . ": " . $value . "<br>";
+            }
+            echo "<hr>";
+        }
+    } else {
+        echo "No records found";
+    }
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
 
-
-		 ?>
-
+?>
 </body>
 </html>

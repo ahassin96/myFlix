@@ -6,10 +6,31 @@ class DbConnect {
     public string $dbname;
 
     public function __construct() {
-        $this->host = "ec2-52-20-195-51.compute-1.amazonaws.com";
-        $this->user = getenv('DB_USERNAME');
-        $this->password = getenv('DB_PASSWORD');
-        $this->dbname = "myflixdb";
+    $this->host = "ec2-52-20-195-51.compute-1.amazonaws.com";
+    $this->dbname = "myflixdb";
+
+    $envFile = __DIR__ . '/.env';
+
+    if (file_exists($envFile)) {
+        $envVariables = parse_ini_file($envFile, false, INI_SCANNER_RAW);
+
+        if ($envVariables !== false) {
+            foreach ($envVariables as $key => $value) {
+                putenv("$key=$value");
+            }
+
+            $this->user = getenv('DB_USERNAME');
+            $this->password = getenv('DB_PASSWORD');
+           
+        } else {
+            
+            error_log('Error reading .env file');
+        }
+    } else {
+       
+        error_log('.env file not found');
+    }
+
     }
 
     public function connect() {
