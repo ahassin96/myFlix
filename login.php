@@ -28,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        
         if ($user && $inputPassword === $user['Password']) {
            
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
+            $_SESSION['user_id'] = $user['UserId'];
+            $_SESSION['username'] = $user['Username'];
 
             
             header('Location: index.php');
