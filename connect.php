@@ -1,7 +1,7 @@
 <?php
 class DbConnect{
 
- public $host = "@ec2-52-20-195-51.compute-1.amazonaws.com"; 
+ public $host = "ec2-user@ec2-52-20-195-51.compute-1.amazonaws.com"; 
  public $user = getenv(DB_USERNAME); 
  public $password = getenv(DB_PASSWORD); 
  public $dbname = "myflixdb"; 
