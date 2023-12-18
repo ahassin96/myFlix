@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
        
-        $stmt = $conn->prepare('SELECT * FROM UserAccounts WHERE username = :username');
+        $stmt = $conn->prepare('SELECT * FROM UserAccounts WHERE Username = :username');
 
        
         $stmt->bindParam(':username', $inputUsername);
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
        
-        if ($user && password_verify($inputPassword, $user['password'])) {
+        if ($user && password_verify($inputPassword, $user['Password'])) {
            
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
