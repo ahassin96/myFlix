@@ -4,7 +4,6 @@ $conn = new DbConnect();
 $conn = $conn->connect();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once 'db_connection.php';
 
     $inputUsername = $_POST['username'];
     $inputPassword = $_POST['password'];
