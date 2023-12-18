@@ -21,9 +21,7 @@ class DbConnect {
 
             $this->user = getenv('DB_USERNAME');
             $this->password = getenv('DB_PASSWORD');
-            echo "user is " .$this->user;
-            echo "user is " .$this->password;
-           
+                       
         } else {
             
             error_log('Error reading .env file');
