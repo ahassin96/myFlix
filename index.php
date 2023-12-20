@@ -16,37 +16,8 @@ if(!isset($_SESSION["username"])){
 	<title> hello this is new change </title>
 </head>
 <body>
-		<p> this is the body</p>
-		<p> this is the new text added for apache test</p>		
-		<p> second test </p>
-		<?php 
-        echo $_SESSION["username"];
-		try{
-    $sql = "SELECT * FROM UserAccounts";
-
-    
-    $stmt = $conn->prepare($sql);
-
-    
-    $stmt->execute();
-
-    
-    if ($stmt->rowCount() > 0) {
-        
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            
-            foreach ($row as $key => $value) {
-                echo $key . ": " . $value . "<br>";
-            }
-            echo "<hr>";
-        }
-    } else {
-        echo "No records found";
-    }
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-
-?>
+		<h1> Welcome <?php echo $_SESSION["username"];?></h1>
+            <a href = "logout.php">Exit</a>
+		
 </body>
 </html>
