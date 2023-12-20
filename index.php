@@ -9,8 +9,8 @@ if (!isset($_SESSION["username"])) {
 }
 $userId = $_SESSION["user_id"];
 
-$stmt = $pdo->prepare("SELECT * FROM UserProfiles WHERE user_id = :user_id");
-$stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+$stmt = $pdo->prepare("SELECT * FROM UserProfiles WHERE UserId = :UserId");
+$stmt->bindParam(':UserId', $userId, PDO::PARAM_INT);
 $stmt->execute();
 $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
