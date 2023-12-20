@@ -20,7 +20,7 @@ if(!isset($_SESSION["username"])){
 		<p> this is the new text added for apache test</p>		
 		<p> second test </p>
 		<?php 
-    
+        echo $_SESSION["username"];
 		try{
     $sql = "SELECT * FROM UserAccounts";
 
