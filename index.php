@@ -33,9 +33,9 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <ul>
             <?php foreach ($profiles as $profile): ?>
                 <li>
-                    <strong>Profile Name:</strong> <?php echo $profile['profile_name']; ?><br>
+                    <strong>Profile Name:</strong> <?php echo $profile['ProfileName']; ?><br>
                     
-                    <a href="profile.php?profile_id=<?php echo $profile['profile_id']; ?>">View Profile</a>
+                    <a href="profile.php?ProfileId=<?php echo $profile['ProfileId']; ?>">View Profile</a>
                 </li>
             <?php endforeach; ?>
         </ul>
