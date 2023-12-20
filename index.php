@@ -5,6 +5,15 @@ $conn = $conn->connect();
 if(!isset($_SESSION["username"])){
     header("Location:login.php");
 } 
+$userId = $_SESSION["user_id"];
+
+           
+
+                $stmt = $pdo->prepare("SELECT * FROM UserProfiles WHERE user_id = :user_id");
+                $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+                $stmt->execute();
+                $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 ?>
 
@@ -18,7 +27,11 @@ if(!isset($_SESSION["username"])){
 <body>
 		<h1> Welcome <?php echo $_SESSION["username"];?></h1>
             <a href = "logout.php">Exit</a>
-            <a href = "createuser.php">Create Account</a>
+            <?php if (empty($profiles)): ?>
+            <p>No profiles found for this user.</p>
+            <?php else: ?>
+
+
 		
 </body>
 </html>
