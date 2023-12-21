@@ -24,10 +24,10 @@ $videos = $collection->find();
     <h1>MyFlix Video Library</h1>
 
     <div class="video-container" id="comedy-container">
-        <?php foreach ($videos as $video): ?>
+        <?php foreach ($comedyVideos as $video): ?>
             <div class="video">
                 <video controls>
-                    <source src="<?php echo $video['video_url']; ?>" type="video/mp4">
+                    <source src="<?php echo $video['url']; ?>" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
