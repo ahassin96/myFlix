@@ -27,8 +27,12 @@ $videos = $collection->find();
         <div>
             <h2><?= $video['title']; ?></h2>
             <p>Duration: <?= $video['duration']; ?></p>
-            
-            <a href="watch.php?url=<?= urlencode($video['url']); ?>">Watch Video</a>
+
+      
+            <video width="640" height="360" controls>
+                <source src="<?= $video['url']; ?>" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     <?php endforeach; ?>
 </body>
