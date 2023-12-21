@@ -37,7 +37,7 @@ $actionVideos = $database->action->find();
     <h1>MyFlix Video Library</h1>
 
     <div class="video-container" id="comedy-container">
-        <?php foreach ($comedyVideos as $video): ?>
+        <?php foreach ($militaryVideos as $video): ?>
             <div class="video">
                 <video controls>
                     <source src="<?php echo $video['video_url']; ?>" type="video/mp4">
