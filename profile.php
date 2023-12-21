@@ -24,7 +24,7 @@ $videos = $collection->find();
     <h1>MyFlix Video Library</h1>
 
     <div class="video-container" id="comedy-container">
-        <?php foreach ($comedyVideos as $video): ?>
+        <?php foreach ($videos as $video): ?>
             <div class="video">
                 <video controls>
                     <source src="<?php echo $video['url']; ?>" type="video/mp4">
