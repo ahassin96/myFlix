@@ -2,7 +2,11 @@
 
 require 'vendor/autoload.php';
 
-$mongoClient = new MongoDB\Client("mongodb://localhost:27017");
+phpinfo();
+
+use MongoDB\Client;
+
+$mongoClient = new Client("mongodb://ec2-44-221-241-112.compute-1.amazonaws.com:27017");
 
 
 $database = $mongoClient->myflix;
