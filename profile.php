@@ -13,14 +13,8 @@ $database = $mongoClient->myflix;
 
 $collection = $database->children;
 
+$videos = $collection->find();
 
-
-$cursor = $collection->find();
-
-
-foreach ($cursor as $document) {
-    var_dump($document);
-}
 ?>
 
 <!DOCTYPE html>
@@ -30,5 +24,12 @@ foreach ($cursor as $document) {
 </head>
 <body>
 	<p>	This is profile </p>
+	<?php foreach ($videos as $video): ?>
+    <div>
+        <h2><?= $video['title']; ?></h2>
+        <p><?= $video['description']; ?></p>
+        <a href="watch.php?url=<?= urlencode($video['url']); ?>">Watch Video</a>
+    </div>
+<?php endforeach; ?>
 </body>
 </html>
