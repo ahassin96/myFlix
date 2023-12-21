@@ -2,7 +2,6 @@
 
 require 'vendor/autoload.php';
 
-phpinfo();
 
 use MongoDB\Client;
 
