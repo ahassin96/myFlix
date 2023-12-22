@@ -26,7 +26,7 @@ $genres = ['horror', 'military', 'action'];
     <?php
     try {
         foreach ($genres as $genre) {
-            $videos = $database->videos->find(['genre' => $genre]);
+            $videos = $database->movies->find(['genre' => $genre]);
             ?>
 
             <div class="video-container" id="<?php echo $genre; ?>-container">
