@@ -7,9 +7,13 @@ use MongoDB\Client;
 $mongoClient = new Client("mongodb://ec2-44-221-241-112.compute-1.amazonaws.com:27017");
 
 $database = $mongoClient->myflix;
-$horrorVideos = $database->horror->find();
-$militaryVideos = $database->military->find();
-$actionVideos = $database->action->find();
+try {
+    $horrorVideos = $database->horror->find();
+    $militaryVideos = $database->military->find();
+    $actionVideos = $database->action->find();
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
 
 
 ?>
