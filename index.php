@@ -20,26 +20,32 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <head>
     <title>Welcome to Your Profiles</title>
+    <link rel="stylesheet" href="css/mystyle.css">
 </head>
 
 <body>
     <h1>Welcome <?php echo $_SESSION["username"]; ?></h1>
     <a href="logout.php">Logout</a>
 
-    <?php if (empty($profiles)): ?>
-        <p>No profiles found for this user.</p>
-    <?php else: ?>
-        <h2>Your Profiles:</h2>
-        <ul>
-            <?php foreach ($profiles as $profile): ?>
-                <li>
-                    <strong>Profile Name:</strong> <?php echo $profile['ProfileName']; ?><br>
-                    
-                    <a href="profile.php?ProfileId=<?php echo $profile['ProfileId']; ?>">View Profile</a>
-                </li>
+    <?php foreach ($genres as $genre): ?>
+        <?php
+            
+            $videos = $database->videos->find(['genre' => $genre]);
+        ?>
+        <div class="video-container" id="<?php echo $genre; ?>-container">
+            <h2><?php echo ucfirst($genre); ?></h2>
+
+            <?php foreach ($videos as $video): ?>
+                <div class="video">
+                    <video controls>
+                        <source src="<?php echo $video['url']; ?>" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p><?php echo $video['title']; ?></p>
+                </div>
             <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
 </body>
 
 </html>

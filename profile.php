@@ -7,9 +7,9 @@ use MongoDB\Client;
 $mongoClient = new Client("mongodb://ec2-44-221-241-112.compute-1.amazonaws.com:27017");
 
 $database = $mongoClient->myflix;
-$collection = $database->children;
 
-$videos = $collection->find();
+$genres = ['horror', 'military', 'action'];
+
 
 ?>
 
@@ -23,8 +23,8 @@ $videos = $collection->find();
 <body>
     <h1>MyFlix Video Library</h1>
 
-    <div class="video-container" id="comedy-container">
-        <?php foreach ($videos as $video): ?>
+    <div class="video-container" id="horror-container">
+        <?php foreach ($horrors as $horror): ?>
             <div class="video">
                 <video controls>
                     <source src="<?php echo $video['url']; ?>" type="video/mp4">
@@ -32,6 +32,8 @@ $videos = $collection->find();
                 </video>
             </div>
         <?php endforeach; ?>
+
+        
     </div>
 </body>
 </html>
