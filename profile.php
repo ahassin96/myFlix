@@ -24,7 +24,7 @@ $actionVideos = $database->action->find();
 <body>
     <h1>MyFlix Video Library</h1>
 
-    v class="video-container" id="comedy-container">
+    <div class="video-container" id="comedy-container">
         <?php foreach ($militaryVideos as $video): ?>
             <div class="video">
                 <video controls>
