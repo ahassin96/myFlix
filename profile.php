@@ -18,32 +18,41 @@ $genres = ['horror', 'military', 'action'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="css/mystyle.css">
     <title>MyFlix Video Library</title>
 </head>
 <body>
     <h1>MyFlix Video Library</h1>
 
-   <?php foreach ($genres as $genre): ?>
-        <?php
-            
-            $videos = $database->videos->find(['genre' => $genre]);
+    <?php foreach ($genres as $genre) {
+       
+        $videos = $database->videos->find(['genre' => $genre]);
+
+       
         ?>
         <div class="video-container" id="<?php echo $genre; ?>-container">
             <h2><?php echo ucfirst($genre); ?></h2>
+        <?php
 
-            <?php foreach ($videos as $video): ?>
-                <div class="video">
-                    <video controls>
-                        <source src="<?php echo $video['url']; ?>" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <p><?php echo $video['title']; ?></p>
-                </div>
-            <?php endforeach; ?>
+     
+        foreach ($videos as $video) {
+            
+            ?>
+            <div class="video">
+                <video controls>
+                    <source src="<?php echo $video['url']; ?>" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p><?php echo $video['title']; ?></p>
+            </div>
+            <?php
+        }
+
+        ?>
         </div>
-    <?php endforeach; ?>
+        <?php
+    }
 
-        
-    </div>
-</body>
-</html>
+    ?>
+    </body>
+    </html>
