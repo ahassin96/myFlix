@@ -7,14 +7,8 @@ use MongoDB\Client;
 $mongoClient = new Client("mongodb://ec2-44-221-241-112.compute-1.amazonaws.com:27017");
 
 $database = $mongoClient->myflix;
-try {
-    $horrorVideos = $database->horror->find();
-    $militaryVideos = $database->military->find();
-    $actionVideos = $database->action->find();
-} catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
-}
 
+$genres = ['horror', 'military', 'action'];
 
 ?>
 
@@ -23,56 +17,42 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <title>MyFlix Video Library</title>
 </head>
 <body>
     <h1>MyFlix Video Library</h1>
 
-    <div class="video-container" id="comedy-container">
-        <?php foreach ($militaryVideos as $video): ?>
-            <div class="video">
-                <video controls>
-                    <source src="<?php echo $video['url']; ?>" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+    <?php
+    try {
+        foreach ($genres as $genre) {
+            $videos = $database->videos->find(['genre' => $genre]);
+            ?>
+
+            <div class="video-container" id="<?php echo $genre; ?>-container">
+                <h2><?php echo ucfirst($genre); ?></h2>
+
+                <?php
+                foreach ($videos as $video) {
+                    ?>
+                    <div class="video">
+                        <video controls>
+                            <source src="<?php echo $video['url']; ?>" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p><?php echo $video['title']; ?></p>
+                    </div>
+                    <?php
+                }
+                ?>
             </div>
-        <?php endforeach; ?>
-    </div>
 
-    <div class="video-container" id="action-container">
-        <?php foreach ($actionVideos as $video): ?>
-            <div class="video">
-                <video controls>
-                    <source src="<?php echo $video['url']; ?>" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        <?php endforeach; ?>
-    </div>
-
-    <div class="video-container" id="horror-container">
-        <?php foreach ($horrorVideos as $video): ?>
-            <div class="video">
-                <video controls>
-                    <source src="<?php echo $video['url']; ?>" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        <?php endforeach; ?>
-    </div>
-
-
-    <script>
-        function scrollVideos(containerId, direction) {
-            const container = document.getElementById(containerId);
-            container.scrollBy({
-                left: direction === 'left' ? -300 : 300,
-                behavior: 'smooth'
-            });
+            <?php
         }
-    </script>
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+    ?>
 
-        
-    </div>
 </body>
 </html>
