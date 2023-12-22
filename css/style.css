@@ -1,17 +1,14 @@
-<style>
-    .video-container {
-        display: flex;
-        white-space: nowrap;
-    }
+   .video-container {
+            display: flex;
+        }
 
-    .video {
-        width: 300px;
-        margin-right: 10px;
-        border: 1px solid #ccc; 
-    }
+        .video {
+            width: 300px;
+            margin-right: 10px;
+            border: 1px solid #ccc; 
+        }
 
-    .video video {
-        width: 200px;
-        height: auto;
-    }
-</style>
+        .video video {
+            width: 200px;
+            height: auto;
+        }
