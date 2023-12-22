@@ -1,14 +1,13 @@
  <style>
         .video-container {
-            width: 100%;
+            display: flex;
             overflow-x: scroll;
             white-space: nowrap;
-            margin-bottom: 20px;
         }
 
         .video {
-            display: inline-block;
-            margin-right: 20px;
+            width: 300px;
+            margin-right: 10px;
         }
 
         .video video {
