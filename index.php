@@ -4,10 +4,15 @@ require_once "connect.php";
 $conn = new DbConnect();
 $pdo = $conn->connect();
 
+
 if (!isset($_SESSION["username"])) {
     header("Location: login.php");
+    exit(); 
 }
-$userId = $_SESSION["user_id"];
+
+
+$userId = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : null;
+
 
 $stmt = $pdo->prepare("SELECT * FROM UserProfiles WHERE UserId = :UserId");
 $stmt->bindParam(':UserId', $userId, PDO::PARAM_INT);
@@ -24,7 +29,7 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-    <h1>Welcome <?php echo $_SESSION["username"]; ?></h1>
+    <h1>Welcome <?php echo htmlspecialchars($_SESSION["username"]); ?></h1>
     <a href="logout.php">Logout</a>
 
     <?php if (empty($profiles)): ?>
@@ -34,9 +39,8 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <ul>
             <?php foreach ($profiles as $profile): ?>
                 <li>
-                    <strong>Profile Name:</strong> <?php echo $profile['ProfileName']; ?><br>
-                    
-                    <a href="profile.php?ProfileId=<?php echo $profile['ProfileId']; ?>">View Profile</a>
+                    <strong>Profile Name:</strong> <?php echo htmlspecialchars($profile['ProfileName']); ?><br>
+                    <a href="profile.php?ProfileId=<?php echo htmlspecialchars($profile['ProfileId']); ?>">View Profile</a>
                 </li>
             <?php endforeach; ?>
         </ul>
