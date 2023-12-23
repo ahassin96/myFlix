@@ -24,7 +24,7 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html>
 
 <head>
-    <title>Welcome to Your Profiles</title>
+    <title>Welcome to Your profile</title>
     <link rel="stylesheet" href="css/mystyle.css">
 </head>
 
