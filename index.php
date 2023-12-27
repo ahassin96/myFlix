@@ -38,11 +38,21 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2>Your Profiles:</h2>
         <ul>
             <?php foreach ($profiles as $profile): ?>
-                <li>
-                    <strong>Profile Name:</strong> <?php echo htmlspecialchars($profile['ProfileName']); ?><br>
-                    <a href="profile.php?ProfileId=<?php echo htmlspecialchars($profile['ProfileId']); ?>">View Profile</a>
-                </li>
-            <?php endforeach; ?>
+            <li>
+                <strong>Profile Name:</strong> <?php echo $profile['ProfileName']; ?><br>
+                <?php
+                
+                $isChildProfile = $profile['ProfileType']) === 'Child';
+
+               
+                $profileType = $isChildProfile ? 'Child' : 'Adult';
+                $profileId = $profile['ProfileId'];
+                $profilePage = $isChildProfile ? 'childProfile.php' : 'adultProfile.php';
+                ?>
+                <a href="<?php echo $profilePage; ?>?ProfileId=<?php echo $profileId; ?>">View <?php echo ucfirst($profileType); ?> Profile</a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
         </ul>
     <?php endif; ?>
 </body>
