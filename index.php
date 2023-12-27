@@ -42,7 +42,7 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <strong>Profile Name:</strong> <?php echo $profile['ProfileName']; ?><br>
                 <?php
                 
-                $isChildProfile = $profile['ProfileType']) === 'Child';
+                $isChildProfile = $profile['ProfileType'] === 'Child';
 
                
                 $profileType = $isChildProfile ? 'Child' : 'Adult';
