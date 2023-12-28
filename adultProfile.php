@@ -16,7 +16,7 @@ if (isset($_GET['selectedProfile'])) {
 
         
         $_SESSION['userProfile'] = $_GET['selectedProfile'];
-           var_dump($_SESSION['userProfile'])
+           var_dump($_SESSION['userProfile']);
     }
 
 ?>
