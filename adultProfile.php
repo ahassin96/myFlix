@@ -10,8 +10,9 @@ $database = $mongoClient->myflix;
 
 $genres = ['horror', 'military', 'action'];
 
-echo  $_SESSION['user_id'] = $user['UserId'];
-echo  $_SESSION['username'] = $user['Username'];
+echo  $_SESSION['user_id'];
+echo  $_SESSION['username'];
+echo $_SESSION['userProfile'];
 
 ?>
 
