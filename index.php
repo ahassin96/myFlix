@@ -19,7 +19,7 @@ $stmt->bindParam(':UserId', $userId, PDO::PARAM_INT);
 $stmt->execute();
 $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if (isset($_GET['selected_profile'])) {
+if (isset($_GET['selectedProfile'])) {
         
         $_SESSION['userProfile'] = $_GET['selectedProfile'];
     }
