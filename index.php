@@ -18,6 +18,12 @@ $stmt = $pdo->prepare("SELECT * FROM UserProfiles WHERE UserId = :UserId");
 $stmt->bindParam(':UserId', $userId, PDO::PARAM_INT);
 $stmt->execute();
 $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+if (isset($_GET['selected_profile'])) {
+        
+        $_SESSION['userProfile'] = $_GET['selectedProfile'];
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -44,12 +50,11 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
                 $isChildProfile = $profile['AccountType'] === 'Child';
 
-               
                 $profileType = $isChildProfile ? 'Child' : 'Adult';
                 $profileId = $profile['ProfileId'];
                 $profilePage = $isChildProfile ? 'childProfile.php' : 'adultProfile.php';
                 ?>
-                <a href="<?php echo $profilePage; ?>?ProfileId=<?php echo $profileId; ?>">View <?php echo ucfirst($profileType); ?> Profile</a>
+                <a href="<?php echo $profilePage; ?>?ProfileId=<?php echo $profileId; ?>&selectedProfile=<?php echo urlencode($profile['ProfileName']); ?>">View <?php echo ucfirst($profileType); ?> Profile</a>
             </li>
         <?php endforeach; ?>
     </ul>
