@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require 'vendor/autoload.php';
 
 use MongoDB\Client;
@@ -12,7 +12,7 @@ $genres = ['horror', 'military', 'action'];
 
 echo  $_SESSION['user_id'];
 echo  $_SESSION['username'];
-echo $_SESSION['userProfile'];
+echo  $_SESSION['userProfile'];
 
 ?>
 
