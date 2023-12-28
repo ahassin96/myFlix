@@ -12,7 +12,12 @@ $genres = ['horror', 'military', 'action'];
 
 echo  $_SESSION['user_id'];
 echo  $_SESSION['username'];
-var_dump($_SESSION['userProfile'])
+if (isset($_GET['selectedProfile'])) {
+
+        
+        $_SESSION['userProfile'] = $_GET['selectedProfile'];
+           var_dump($_SESSION['userProfile'])
+    }
 
 ?>
 
