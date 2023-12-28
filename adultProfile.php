@@ -12,7 +12,7 @@ $genres = ['horror', 'military', 'action'];
 
 echo  $_SESSION['user_id'];
 echo  $_SESSION['username'];
-echo  $_SESSION['userProfile'];
+var_dump($_SESSION['userProfile'])
 
 ?>
 
