@@ -6,7 +6,7 @@ class DbConnect {
     public string $dbname;
 
     public function __construct() {
-    $this->host = "ec2-52-20-195-51.compute-1.amazonaws.com";
+    $this->host = "ec2-54-88-88-30.compute-1.amazonaws.com";
     $this->dbname = "myflixdb";
 
     $envFile = __DIR__ . '/.env';
