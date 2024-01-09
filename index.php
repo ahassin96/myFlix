@@ -40,4 +40,20 @@ if (isset($_GET['selectedProfile'])) {
     <?php else: ?>
         <h2>Your Profiles:</h2>
         <ul>
-            <?php fore
+            <?php foreach ($profiles as $profile): ?>
+            <li>
+                <strong>Profile Name:</strong> <?php echo $profile['ProfileName']; ?><br>
+                <?php
+                $isChildProfile = $profile['AccountType'] === 'Child';
+                $profileType = $isChildProfile ? 'Child' : 'Adult';
+                $profileId = $profile['ProfileId'];
+                $profilePage = $isChildProfile ? 'childProfile.php' : 'adultProfile.php';
+                ?>
+                <a href="<?php echo $profilePage; ?>?ProfileId=<?php echo $profileId; ?>&selectedProfile=<?php echo urlencode($profile['ProfileName']); ?>">View <?php echo ucfirst($profileType); ?> Profile</a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <?php endif; ?>
+</body>
+
+</html>
