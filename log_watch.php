@@ -28,4 +28,13 @@ try {
 } catch (PDOException $e) {
     echo json_encode(['error' => 'Error logging watch: ' . $e->getMessage()]);
 }
+
 ?>
+<script>
+                $(document).ready(function() {
+                
+                       console.log("Video ID:", $videoId);
+                        console.log("User ID:", $userId);
+                        console.log("User Profile:", $userProfile);
+
+            </script>
