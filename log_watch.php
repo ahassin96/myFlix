@@ -14,9 +14,9 @@ try {
     
     $stmt = $pdo->prepare("INSERT INTO watch_history (user_id, video_id, profile) VALUES (:userId, :videoId, :userProfile)");
 
-    $userId = $_SESSION['user_id'];
-    $videoId = $_GET['id'];
-    $userProfile = $_SESSION['userProfile'];
+    $userId = $_GET['userId'];
+    $videoId = $_GET['videoId'];
+    $userProfile = $_GET['userProfile'];
 
     $stmt->bindParam(':userId', $userId);
     $stmt->bindParam(':videoId', $videoId);
@@ -30,10 +30,3 @@ try {
 }
 
 ?>
-<script>
-    $(document).ready(function() {
-        console.log("Video ID:", <?php echo json_encode($videoId); ?>);
-        console.log("User ID:", <?php echo json_encode($userId); ?>);
-        console.log("User Profile:", <?php echo json_encode($userProfile); ?>);
-    });
-</script>
