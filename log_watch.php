@@ -19,9 +19,16 @@ echo 'console.log(' . json_encode($neo4jConnection, JSON_PRETTY_PRINT) . ');';
 echo '</script>';
 
 
+$connectionUrl = sprintf(
+    'bolt://%s:%s@%s:%s',
+    $neo4jConnection['username'],
+    $neo4jConnection['password'],
+    $neo4jConnection['host'],
+    $neo4jConnection['port']
+);
+
 $client = ClientBuilder::create()
-    ->addConnection('default', $neo4jConnection['host'], $neo4jConnection['port'])
-    ->setDefaultDriver('bolt') 
+    ->addConnection('default', $connectionUrl)
     ->setAutoFormatResponse(true)
     ->build();
 
