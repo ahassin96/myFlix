@@ -43,6 +43,10 @@ try {
                     var userId = "<?php echo $userAccount; ?>";
                     var userProfile = "<?php echo $Profile; ?>";
 
+                       console.log("Video ID:", videoId);
+                        console.log("User ID:", userId);
+                        console.log("User Profile:", userProfile);
+
                     $('#watchVideo').on('play', function() {
                         $.ajax({
                             type: 'POST',
@@ -62,12 +66,10 @@ try {
                     });
                 });
             </script>
-            <script>
+          
 
-    console.log("Video ID:", videoId);
-    console.log("User ID:", userId);
-    console.log("User Profile:", userProfile);
-</script>
+ 
+
         </body>
         </html>
         <?php
