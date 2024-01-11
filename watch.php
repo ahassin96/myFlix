@@ -40,8 +40,8 @@ try {
             <script>
                 $(document).ready(function() {
                     var videoId = "<?php echo $videoId; ?>";
-                    var userId = "<?php echo $userAccount; ?>";
-                    var userProfile = "<?php echo $Profile; ?>";
+                    var userId = "<?php echo $userId; ?>";  
+                    var userProfile = "<?php echo $userProfile; ?>";  
 
                        console.log("Video ID:", videoId);
                         console.log("User ID:", userId);
