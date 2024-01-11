@@ -1,50 +1,31 @@
 <?php
 session_start();
 require 'vendor/autoload.php';
+require_once 'connect.php';
 
-use GraphAware\Neo4j\Client\ClientBuilder;
-use Dotenv\Dotenv;
-
-$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-$neo4jConnection = [
-    'host' => $_ENV['NEO4J_HOST'],
-    'port' => $_ENV['NEO4J_PORT'],
-    'username' => $_ENV['NEO4J_USERNAME'],
-    'password' => $_ENV['NEO4J_PASSWORD'],
-];
-
-$connectionUrl = sprintf(
-    'bolt://%s:%s@%s:%s',
-    $neo4jConnection['username'],
-    $neo4jConnection['password'],
-    $neo4jConnection['host'],
-    $neo4jConnection['port']
-);
-
-$client = ClientBuilder::create()
-    ->addConnection('default', $connectionUrl)
-    ->build();
-
-
 try {
-    $client->run("MERGE (u:User {_id: {userId}})", ['userId' => $userId]);
-    $client->run("MERGE (v:Video {_id: {videoId}})", ['videoId' => $videoId]);
+    
+    $conn = new DbConnect();
+    $pdo = $conn->connect();
 
-    $client->run(
-        "MATCH (u:User {_id: {userId}})
-        MATCH (v:Video {_id: {videoId}})
-        MERGE (u)-[:WATCHED {profile: {userProfile}}]->(v)",
-        [
-            'userId' => $userId,
-            'videoId' => $videoId,
-            'userProfile' => $userProfile,
-        ]
-    );
+    
+    $stmt = $pdo->prepare("INSERT INTO watch_history (user_id, video_id, profile) VALUES (:userId, :videoId, :userProfile)");
+
+    $userId = $_SESSION['user_id'];
+    $videoId = $_GET['id'];
+    $userProfile = $_SESSION['userProfile'];
+
+    $stmt->bindParam(':userId', $userId);
+    $stmt->bindParam(':videoId', $videoId);
+    $stmt->bindParam(':userProfile', $userProfile);
+
+    $stmt->execute();
 
     echo json_encode(['success' => true]);
-} catch (Exception $e) {
+} catch (PDOException $e) {
     echo json_encode(['error' => 'Error logging watch: ' . $e->getMessage()]);
 }
 ?>
