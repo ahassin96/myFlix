@@ -14,9 +14,9 @@ try {
     
     $stmt = $pdo->prepare("INSERT INTO watch_history (user_id, video_id, profile) VALUES (:userId, :videoId, :userProfile)");
 
-    $userId = $_GET['userId'];
-    $videoId = $_GET['videoId'];
-    $userProfile = $_GET['userProfile'];
+    $userId = $_SESSION['user_id'];
+    $videoId = $_SESSION['myVideo'];
+    $userProfile = $_SESSION['userProfile'];
 
     $stmt->bindParam(':userId', $userId);
     $stmt->bindParam(':videoId', $videoId);
