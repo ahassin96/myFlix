@@ -15,11 +15,6 @@ $neo4jConnection = [
     'password' => $_ENV['NEO4J_PASSWORD'],
 ];
 
-echo '<script>';
-echo 'console.log(' . json_encode($neo4jConnection, JSON_PRETTY_PRINT) . ');';
-echo '</script>';
-
-
 $connectionUrl = sprintf(
     'bolt://%s:%s@%s:%s',
     $neo4jConnection['username'],
@@ -32,36 +27,27 @@ $client = ClientBuilder::create()
     ->addConnection('default', $connectionUrl)
     ->build();
 
-
 $videoId = $_POST['videoId'];
 $userId = $_POST['userId'];
 $userProfile = $_POST['userProfile'];
 
 try {
-   
-   $client->run("
-        MERGE (u:User {_id: {userId}})
-    ", ['userId' => $userId]);
+    $client->run("MERGE (u:User {_id: {userId}})", ['userId' => $userId]);
+    $client->run("MERGE (v:Video {_id: {videoId}})", ['videoId' => $videoId]);
 
-    
-    $client->run("
-        MERGE (v:Video {_id: {videoId}})
-    ", ['videoId' => $videoId]);
-
-    $client->run("
-        MATCH (u:User {_id: {userId}})
+    $client->run(
+        "MATCH (u:User {_id: {userId}})
         MATCH (v:Video {_id: {videoId}})
-        MERGE (u)-[:WATCHED {profile: {userProfile}}]->(v)
-    ", [
-        'userId' => $userId,
-        'videoId' => $videoId,
-        'userProfile' => $userProfile,
-    ]);
-
-
+        MERGE (u)-[:WATCHED {profile: {userProfile}}]->(v)",
+        [
+            'userId' => $userId,
+            'videoId' => $videoId,
+            'userProfile' => $userProfile,
+        ]
+    );
 
     echo json_encode(['success' => true]);
 } catch (Exception $e) {
-    
     echo json_encode(['error' => 'Error logging watch: ' . $e->getMessage()]);
 }
+?>

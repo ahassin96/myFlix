@@ -7,25 +7,21 @@ use MongoDB\Client;
 $mongoClient = new Client("mongodb://ec2-54-221-90-30.compute-1.amazonaws.com:27017");
 $database = $mongoClient->admin;
 
-
 $videoId = $_GET['id'];
 $userAccount = $_SESSION['user_id'];
 $Profile = $_SESSION['userProfile'];
 
-
 try {
-    
     $videoDetails = $database->movies->findOne(['_id' => new MongoDB\BSON\ObjectId($videoId)]);
 
     if ($videoDetails) {
         ?>
-
         <!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <link rel="stylesheet" href="css/style.css">
             <title>Watch Video - MyFlix</title>
         </head>
@@ -40,7 +36,6 @@ try {
             </video>
             <p>test</p>
             <script>
-                
                 $(document).ready(function() {
                     var videoId = "<?php echo $videoId; ?>";
                     var userId = "<?php echo $userAccount; ?>";
@@ -59,7 +54,7 @@ try {
                                 console.log('Watch logged successfully');
                             },
                             error: function(error) {
-                                console.error('Error logging watch: ' + error);
+                                console.error('Error logging watch: ' + error.responseText);
                             }
                         });
                     });
@@ -67,7 +62,6 @@ try {
             </script>
         </body>
         </html>
-
         <?php
     } else {
         echo "Video not found.";
