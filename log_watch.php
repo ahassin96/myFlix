@@ -4,6 +4,8 @@ require 'vendor/autoload.php';
 use GraphAware\Neo4j\Client\ClientBuilder;
 use Dotenv\Dotenv;
 
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 $neo4jConnection = [
     'host' => $_ENV['NEO4J_HOST'],
@@ -11,6 +13,10 @@ $neo4jConnection = [
     'username' => $_ENV['NEO4J_USERNAME'],
     'password' => $_ENV['NEO4J_PASSWORD'],
 ];
+
+echo '<script>';
+echo 'console.log(' . json_encode($neo4jConnection, JSON_PRETTY_PRINT) . ');';
+echo '</script>';
 
 
 $client = ClientBuilder::create()
