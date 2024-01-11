@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'vendor/autoload.php';
 
 use GraphAware\Neo4j\Client\ClientBuilder;
