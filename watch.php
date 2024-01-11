@@ -11,6 +11,8 @@ $videoId = $_GET['id'];
 $userAccount = $_SESSION['user_id'];
 $Profile = $_SESSION['userProfile'];
 
+
+
 try {
     $videoDetails = $database->movies->findOne(['_id' => new MongoDB\BSON\ObjectId($videoId)]);
 
@@ -60,6 +62,12 @@ try {
                     });
                 });
             </script>
+            <script>
+
+    console.log("Video ID:", videoId);
+    console.log("User ID:", userId);
+    console.log("User Profile:", userProfile);
+</script>
         </body>
         </html>
         <?php
