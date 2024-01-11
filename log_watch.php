@@ -31,10 +31,9 @@ try {
 
 ?>
 <script>
-                $(document).ready(function() {
-                
-                       console.log("Video ID:", $videoId);
-                        console.log("User ID:", $userId);
-                        console.log("User Profile:", $userProfile);
-
-            </script>
+    $(document).ready(function() {
+        console.log("Video ID:", <?php echo json_encode($videoId); ?>);
+        console.log("User ID:", <?php echo json_encode($userId); ?>);
+        console.log("User Profile:", <?php echo json_encode($userProfile); ?>);
+    });
+</script>
