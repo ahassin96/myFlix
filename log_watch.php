@@ -21,7 +21,7 @@ echo '</script>';
 
 $client = ClientBuilder::create()
     ->addConnection('default', $neo4jConnection['host'], $neo4jConnection['port'])
-    ->setAuthentication($neo4jConnection['username'], $neo4jConnection['password'])
+    ->withCredentials($neo4jConnection['username'], $neo4jConnection['password'])
     ->build();
 
 
