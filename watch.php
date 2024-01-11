@@ -24,7 +24,7 @@ $connectionUrl = sprintf(
 );
 
 $clientNeo4j = ClientBuilder::create()
-    ->addConnection('default', $connectionUrl)
+    ->addConnection('default', $connectionUrl, null, null, null, null, null, null)
     ->build();
 
 $mongoClient = new Client("mongodb://ec2-54-221-90-30.compute-1.amazonaws.com:27017");
