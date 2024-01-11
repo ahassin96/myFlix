@@ -57,8 +57,7 @@ try {
         'videoId' => $videoId,
         'userProfile' => $userProfile,
     ]);
-    
-    $client->run($query, $parameters);
+
 
 
     echo json_encode(['success' => true]);
