@@ -21,7 +21,8 @@ echo '</script>';
 
 $client = ClientBuilder::create()
     ->addConnection('default', $neo4jConnection['host'], $neo4jConnection['port'])
-    ->withCredentials($neo4jConnection['username'], $neo4jConnection['password'])
+    ->setDefaultDriver('bolt') 
+    ->setAutoFormatResponse(true)
     ->build();
 
 
