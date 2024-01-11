@@ -8,6 +8,10 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+$videoId = $_GET['id'];
+$userAccount = $_SESSION['user_id'];
+$Profile = $_SESSION['userProfile'];
+
 $neo4jConnection = [
     'host' => $_ENV['NEO4J_HOST'],
     'port' => $_ENV['NEO4J_PORT'],
