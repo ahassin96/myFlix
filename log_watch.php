@@ -8,10 +8,6 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-$videoId = $_GET['id'];
-$userAccount = $_SESSION['user_id'];
-$Profile = $_SESSION['userProfile'];
-
 $neo4jConnection = [
     'host' => $_ENV['NEO4J_HOST'],
     'port' => $_ENV['NEO4J_PORT'],
@@ -31,9 +27,6 @@ $client = ClientBuilder::create()
     ->addConnection('default', $connectionUrl)
     ->build();
 
-$videoId = $_POST['videoId'];
-$userId = $_POST['userId'];
-$userProfile = $_POST['userProfile'];
 
 try {
     $client->run("MERGE (u:User {_id: {userId}})", ['userId' => $userId]);
