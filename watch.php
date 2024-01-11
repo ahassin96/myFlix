@@ -9,7 +9,7 @@ $database = $mongoClient->myflix;
 
 $videoId = $_GET['id'];
 $userAccount = $_SESSION['user_id'];
-$Profile = $_SESSION['userProfile']
+$Profile = $_SESSION['userProfile'];
 
 
 try {
