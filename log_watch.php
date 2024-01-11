@@ -25,19 +25,24 @@ $userProfile = $_POST['userProfile'];
 
 try {
    
-    $query = "
+   $client->run("
+        MERGE (u:User {_id: {userId}})
+    ", ['userId' => $userId]);
+
+    
+    $client->run("
+        MERGE (v:Video {_id: {videoId}})
+    ", ['videoId' => $videoId]);
+
+    $client->run("
         MATCH (u:User {_id: {userId}})
         MATCH (v:Video {_id: {videoId}})
         MERGE (u)-[:WATCHED {profile: {userProfile}}]->(v)
-    ";
-
-    
-    $parameters = [
+    ", [
         'userId' => $userId,
         'videoId' => $videoId,
         'userProfile' => $userProfile,
-    ];
-
+    ]);
     
     $client->run($query, $parameters);
 
