@@ -8,6 +8,7 @@ $mongoClient = new Client("mongodb://ec2-54-221-90-30.compute-1.amazonaws.com:27
 $database = $mongoClient->admin;
 
 $videoId = $_GET['id'];
+$_SESSION['myVideo'] = $videoId;
 $userAccount = $_SESSION['user_id'];
 $Profile = $_SESSION['userProfile'];
 
