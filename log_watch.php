@@ -29,7 +29,6 @@ $connectionUrl = sprintf(
 
 $client = ClientBuilder::create()
     ->addConnection('default', $connectionUrl)
-    ->setAutoFormatResponse(true)
     ->build();
 
 
