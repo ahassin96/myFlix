@@ -1,26 +1,3 @@
-<?php
-session_start();
-require 'vendor/autoload.php';
-
-use MongoDB\Client;
-
-$mongoClient = new Client("mongodb://ec2-54-221-90-30.compute-1.amazonaws.com:27017");
-
-$database = $mongoClient->admin;
-
-$genres = ['horror', 'military', 'action'];
-
-echo  $_SESSION['user_id'];
-echo  $_SESSION['username'];
-if (isset($_GET['selectedProfile'])) {
-
-        
-        $_SESSION['userProfile'] = $_GET['selectedProfile'];
-        echo $_SESSION['userProfile'];
-    }
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +9,6 @@ if (isset($_GET['selectedProfile'])) {
 </head>
 <body>
     <h1>MyFlix Video Library</h1>
-
 
     <?php
     try {
@@ -48,7 +24,10 @@ if (isset($_GET['selectedProfile'])) {
                     ?>
                     <div class="video">
                         <p><?php echo $video['title']; ?></p>
-                        <a href="http://3.90.74.38:5000/watch.php/<?php echo $video['_id']; ?>">Watch Details</a>
+                        <a href="#" class="watch-details"
+                           data-video-id="<?php echo $video['_id']; ?>"
+                           data-user-id="<?php echo $_SESSION['user_id']; ?>"
+                           data-user-profile="<?php echo $_SESSION['userProfile']; ?>">Watch Details</a>
 
                         <video controls>
                             <source src="<?php echo $video['url']; ?>" type="video/mp4">
@@ -70,7 +49,6 @@ if (isset($_GET['selectedProfile'])) {
 
     <script>
     $(document).ready(function () {
-        
         $('a.watch-details').click(function (event) {
             event.preventDefault(); 
 
@@ -83,7 +61,6 @@ if (isset($_GET['selectedProfile'])) {
             console.log('User ID:', userId);
             console.log('User Profile:', userProfile);
 
-            
             $.ajax({
                 type: 'POST',
                 url: 'log_watch.php',
@@ -99,8 +76,6 @@ if (isset($_GET['selectedProfile'])) {
                     console.error('Error logging watch: ' + error.responseText);
                 }
             });
-
-            
         });
     });
 </script>
