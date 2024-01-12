@@ -7,41 +7,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    <script>
-        function logWatchHistory(videoId, userAccount, userProfile) {
-            $.ajax({
-                type: 'POST',
-                url: 'log_watch.php',
-                data: {
-                    videoId: videoId,
-                    userId: userAccount,
-                    userProfile: userProfile
-                },
-                success: function(response) {
-                    console.log('Watch logged successfully');
-                },
-                error: function(error) {
-                    console.error('Error logging watch: ' + error.responseText);
-                }
-            });
-        }
-
-        $(document).ready(function() {
-            
-            $('a.watch-details').click(function(event) {
-                event.preventDefault(); 
-
-                var videoId = $(this).data('video-id');
-                var userAccount = '<?php echo $_SESSION["user_id"]; ?>';
-                var userProfile = '<?php echo $_SESSION["userProfile"]; ?>';
-
-                logWatchHistory(videoId, userAccount, userProfile);
-
-                window.location.href = 'http://3.90.74.38:5000/watch.php/' + videoId;
-            });
-        });
-    </script>
-
+   
     <?php
     try {
         foreach ($genres as $genre) {
@@ -74,6 +40,43 @@
         echo "Error: " . $e->getMessage();
     }
     ?>
+
+    <script>
+    $(document).ready(function () {
+        
+        $('a.watch-details').click(function (event) {
+            event.preventDefault(); 
+
+            var videoId = $(this).data('video-id');
+            var userId = $(this).data('user-id');
+            var userProfile = $(this).data('user-profile');
+
+            console.log('Clicked "Watch Details" link with the following details:');
+            console.log('Video ID:', videoId);
+            console.log('User ID:', userId);
+            console.log('User Profile:', userProfile);
+
+            
+            $.ajax({
+                type: 'POST',
+                url: 'log_watch.php',
+                data: {
+                    videoId: videoId,
+                    userId: userId,
+                    userProfile: userProfile
+                },
+                success: function (response) {
+                    console.log('Watch logged successfully');
+                },
+                error: function (error) {
+                    console.error('Error logging watch: ' + error.responseText);
+                }
+            });
+
+            
+        });
+    });
+</script>
 
 </body>
 </html>
