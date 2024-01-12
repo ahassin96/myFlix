@@ -33,6 +33,7 @@ if (isset($_GET['selectedProfile'])) {
 <body>
     <h1>MyFlix Video Library</h1>
 
+
     <?php
     try {
         foreach ($genres as $genre) {
@@ -47,10 +48,7 @@ if (isset($_GET['selectedProfile'])) {
                     ?>
                     <div class="video">
                         <p><?php echo $video['title']; ?></p>
-                        <a href="#" class="watch-details"
-                           data-video-id="<?php echo $video['_id']; ?>"
-                           data-user-id="<?php echo $_SESSION['user_id']; ?>"
-                           data-user-profile="<?php echo $_SESSION['userProfile']; ?>">Watch Details</a>
+                        <a href="http://3.90.74.38:5000/watch.php/<?php echo $video['_id']; ?>">Watch Details</a>
 
                         <video controls>
                             <source src="<?php echo $video['url']; ?>" type="video/mp4">
@@ -70,38 +68,6 @@ if (isset($_GET['selectedProfile'])) {
     }
     ?>
 
-    <script>
-    $(document).ready(function () {
-        $('a.watch-details').click(function (event) {
-            event.preventDefault(); 
-
-            var videoId = $(this).data('video-id');
-            var userId = $(this).data('user-id');
-            var userProfile = $(this).data('user-profile');
-
-            console.log('Clicked "Watch Details" link with the following details:');
-            console.log('Video ID:', videoId);
-            console.log('User ID:', userId);
-            console.log('User Profile:', userProfile);
-
-            $.ajax({
-                type: 'POST',
-                url: 'log_watch.php',
-                data: {
-                    videoId: videoId,
-                    userId: userId,
-                    userProfile: userProfile
-                },
-                success: function (response) {
-                    console.log('Watch logged successfully');
-                },
-                error: function (error) {
-                    console.error('Error logging watch: ' + error.responseText);
-                }
-            });
-        });
-    });
-</script>
 
 </body>
 </html>
