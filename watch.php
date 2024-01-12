@@ -25,54 +25,49 @@ require 'vendor/autoload.php';
     </video>
 
     <script>
-        $(document).ready(function() {
-            var videoId = "<?php echo $_GET['id']; ?>";
+    $(document).ready(function() {
+        var videoId = "<?php echo $_GET['id']; ?>";
 
-            $.ajax({
-                type: 'GET',
-                url: 'http://3.90.74.38:5000/watch.php/' + videoId,
-                success: function(response) {
-                    console.log('Video details:', response.video_details);
+        $.ajax({
+            type: 'GET',
+            url: 'http://3.90.74.38:5000/watch.php/' + videoId,
+            success: function(response) {
+                console.log('Video details:', response.video_details);
 
-                    if (response.success) {
-                       
-                        $('#videoDetailsContainer').html(`
-                            <h2>${response.video_details.title}</h2>
-                            <p>${response.video_details.description}</p>
-                        `);
+                if (response.success) {
+                    $('#videoDetailsContainer').html(`
+                        <h2>${response.video_details.title}</h2>
+                        <p>${response.video_details.description}</p>
+                    `);
 
-                        
-                        $('#watchVideo source').attr('src', response.video_details.url);
+                    $('#watchVideo source').attr('src', response.video_details.url);
 
-                        
-                        $('#watchVideo').on('play', function() {
-                            $.ajax({
-                                type: 'POST',
-                                url: 'log_watch.php',
-                                data: {
-                                    videoId: videoId,
-                                    userId: "<?php echo $_SESSION['user_id']; ?>",
-                                    userProfile: "<?php echo $_SESSION['userProfile']; ?>"
-                                },
-                                success: function(response) {
-                                    console.log('Watch logged successfully');
-                                },
-                                error: function(error) {
-                                    console.error('Error logging watch: ' + error.responseText);
-                                }
-                            });
+                    $('#watchVideo').on('play', function() {
+                        $.ajax({
+                            type: 'POST',
+                            url: 'log_watch.php',
+                            data: {
+                                videoId: videoId,
+                                userId: "<?php echo $_SESSION['user_id']; ?>",
+                                userProfile: "<?php echo $_SESSION['userProfile']; ?>"
+                            },
+                            success: function(response) {
+                                console.log('Watch logged successfully');
+                            },
+                            error: function(error) {
+                                console.error('Error logging watch: ' + error.responseText);
+                            }
                         });
-                    } else {
-                        console.error('Error fetching video details:', response.error);
-                       
-                    }
-                },
-                error: function(error) {
-                    console.error('Error fetching video details:', error.responseText);
-                    
+                    });
+                } else {
+                    console.error('Error fetching video details:', response.error);
                 }
-            });
+            },
+            error: function(error) {
+                console.error('Error fetching video details:', error.responseText);
+            }
         });
-    </script>
+    });
+</script>
 </body>
 </html>
