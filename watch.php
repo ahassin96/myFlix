@@ -33,8 +33,10 @@ try {
             <h2><?php echo $videoDetails['title']; ?></h2>
             <p><?php echo $videoDetails['description']; ?></p>
 
-             <iframe src="http:3.90.74.38:8081//watch.php?video_id=<?php echo $videoId; ?>" width="800" height="600"></iframe>
-
+            <video id="watchVideo" controls>
+                <source src="<?php echo $videoDetails['url']; ?>" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
             <p>test</p>
             <script>
                 $(document).ready(function() {
