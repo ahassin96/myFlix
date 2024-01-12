@@ -30,7 +30,7 @@ require 'vendor/autoload.php';
 
             $.ajax({
                 type: 'GET',
-                url: 'http://3.90.74.38:8081/:8081/api/video/' + videoId,
+                url: 'http://3.90.74.38:5000/watch.php/' + videoId,
                 success: function(response) {
                     console.log('Video details:', response.video_details);
 
