@@ -1,6 +1,11 @@
 <?php
 session_start();
 require 'vendor/autoload.php';
+
+$videoId = isset($_GET['id']) ? $_GET['id'] : null;
+$userAccount = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+$Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
+
 ?>
 
 <!DOCTYPE html>
@@ -13,12 +18,26 @@ require 'vendor/autoload.php';
     <title>Watch Video - MyFlix</title>
 </head>
 <body>
+
+
     <h1>Watch Video - MyFlix</h1>
 
-    <div id="videoDetailsContainer">
-        <h2><?php echo $videoDetails['title']; ?></h2>
-        <p><?php echo $videoDetails['description']; ?></p>
-    </div>
+       <div id="videoDetailsContainer">
+            <?php
+           
+            if (isset($videoDetails['title'])) {
+                echo "<h2>{$videoDetails['title']}</h2>";
+            } else {
+                echo "<h2>Video Title Not Available</h2>";
+            }
+
+            if (isset($videoDetails['description'])) {
+                echo "<p>{$videoDetails['description']}</p>";
+            } else {
+                echo "<p>Video Description Not Available</p>";
+            }
+            ?>
+        </div>
 
     <video id="watchVideo" controls>
         Your browser does not support the video tag.
@@ -26,7 +45,9 @@ require 'vendor/autoload.php';
 
     <script>
     $(document).ready(function() {
-        var videoId = "<?php echo $_GET['id']; ?>";
+            var videoId = "<?php echo $videoId; ?>";
+            var userAccount = "<?php echo $userAccount; ?>";
+            var userProfile = "<?php echo $Profile; ?>";
 
         $.ajax({
             type: 'GET',
