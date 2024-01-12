@@ -32,6 +32,49 @@ if (isset($_GET['selectedProfile'])) {
 <body>
     <h1>MyFlix Video Library</h1>
 
+    <script>
+        function loadVideoDetails(videoId, userAccount, userProfile) {
+            $.ajax({
+                type: 'GET',
+                url: 'http://3.90.74.38:5000/watch/' + videoId, 
+                success: function(response) {
+                    console.log('Video details:', response.video_details);
+
+                    if (response.success) {
+                        $('#videoTitle').text(response.video_details.title);
+                        $('#videoDescription').text(response.video_details.description);
+
+                        $('#watchVideo source').attr('src', response.video_details.url);
+                        $('#watchVideo')[0].load(); 
+
+                        $('#watchVideo').on('play', function() {
+                            $.ajax({
+                                type: 'POST',
+                                url: 'log_watch.php',
+                                data: {
+                                    videoId: videoId,
+                                    userId: userAccount,
+                                    userProfile: userProfile
+                                },
+                                success: function(response) {
+                                    console.log('Watch logged successfully');
+                                },
+                                error: function(error) {
+                                    console.error('Error logging watch: ' + error.responseText);
+                                }
+                            });
+                        });
+                    } else {
+                        console.error('Error fetching video details:', response.error);
+                    }
+                },
+                error: function(error) {
+                    console.error('Error fetching video details:', error.responseText);
+                }
+            });
+        }
+    </script>
+
     <?php
     try {
         foreach ($genres as $genre) {
