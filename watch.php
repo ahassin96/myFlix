@@ -21,19 +21,8 @@ $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
     <h1>Watch Video - MyFlix</h1>
 
     <div id="videoDetailsContainer">
-        <?php
-        if (isset($videoDetails['title'])) {
-            echo "<h2>{$videoDetails['title']}</h2>";
-        } else {
-            echo "<h2>Video Title Not Available</h2>";
-        }
-
-        if (isset($videoDetails['description'])) {
-            echo "<p>{$videoDetails['description']}</p>";
-        } else {
-            echo "<p>Video Description Not Available</p>";
-        }
-        ?>
+        <h2 id="videoTitle">Video Title Not Available</h2>
+        <p id="videoDescription">Video Description Not Available</p>
     </div>
 
     <video id="watchVideo" controls>
@@ -53,12 +42,11 @@ $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
                 console.log('Video details:', response.video_details);
 
                 if (response.success) {
-                    $('#videoDetailsContainer').html(`
-                        <h2>${response.video_details.title}</h2>
-                        <p>${response.video_details.description}</p>
-                    `);
+                    $('#videoTitle').text(response.video_details.title);
+                    $('#videoDescription').text(response.video_details.description);
 
                     $('#watchVideo source').attr('src', response.video_details.url);
+                    $('#watchVideo')[0].load(); // Load the video
 
                     $('#watchVideo').on('play', function() {
                         $.ajax({
