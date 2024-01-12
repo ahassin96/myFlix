@@ -1,3 +1,26 @@
+<?php
+session_start();
+require 'vendor/autoload.php';
+
+use MongoDB\Client;
+
+$mongoClient = new Client("mongodb://ec2-54-221-90-30.compute-1.amazonaws.com:27017");
+
+$database = $mongoClient->admin;
+
+$genres = ['horror', 'military', 'action'];
+
+echo  $_SESSION['user_id'];
+echo  $_SESSION['username'];
+if (isset($_GET['selectedProfile'])) {
+
+        
+        $_SESSION['userProfile'] = $_GET['selectedProfile'];
+        echo $_SESSION['userProfile'];
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
