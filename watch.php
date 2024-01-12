@@ -2,63 +2,44 @@
 session_start();
 require 'vendor/autoload.php';
 
-$videoId = isset($_GET['_id']) ? $_GET['_id'] : null;
-$userAccount = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
-$Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
-?>
+use MongoDB\Client;
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <title>Watch Video - MyFlix</title>
-</head>
-<body>
+$mongoClient = new Client("mongodb://ec2-54-221-90-30.compute-1.amazonaws.com:27017");
+$database = $mongoClient->admin;
 
-    <h1>Watch Video - MyFlix</h1>
+$videoId = $_GET['id'];
+$userAccount = $_SESSION['user_id'];
+$Profile = $_SESSION['userProfile'];
 
-    <div id="videoDetailsContainer">
-        <?php
-        if (isset($videoDetails['title'])) {
-            echo "<h2>{$videoDetails['title']}</h2>";
-        } else {
-            echo "<h2>Video Title Not Available</h2>";
-        }
+try {
+    $videoDetails = $database->movies->findOne(['_id' => new MongoDB\BSON\ObjectId($videoId)]);
 
-        if (isset($videoDetails['description'])) {
-            echo "<p>{$videoDetails['description']}</p>";
-        } else {
-            echo "<p>Video Description Not Available</p>";
-        }
+    if ($videoDetails) {
         ?>
-    </div>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <link rel="stylesheet" href="css/style.css">
+            <title>Watch Video - MyFlix</title>
+        </head>
+        <body>
+            <h1>Watch Video - MyFlix</h1>
+            <h2><?php echo $videoDetails['title']; ?></h2>
+            <p><?php echo $videoDetails['description']; ?></p>
 
-    <video id="watchVideo" controls>
-        Your browser does not support the video tag.
-    </video>
-
-    <script>
-    $(document).ready(function() {
-        var videoId = "<?php echo $videoId; ?>";
-        var userAccount = "<?php echo $userAccount; ?>";
-        var userProfile = "<?php echo $Profile; ?>";
-
-        $.ajax({
-            type: 'GET',
-            url: 'http://3.90.74.38:5000/watch.php/' + videoId,
-            success: function(response) {
-                console.log('Video details:', response.video_details);
-
-                if (response.success) {
-                    $('#videoDetailsContainer').html(`
-                        <h2>${response.video_details.title}</h2>
-                        <p>${response.video_details.description}</p>
-                    `);
-
-                    $('#watchVideo source').attr('src', response.video_details.url);
+            <video id="watchVideo" controls>
+                <source src="<?php echo $videoDetails['url']; ?>" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>test</p>
+            <script>
+                $(document).ready(function() {
+                    var videoId = "<?php echo $videoId; ?>";
+                    var userId = "<?php echo $userAccount; ?>";
+                    var userProfile = "<?php echo $Profile; ?>";
 
                     $('#watchVideo').on('play', function() {
                         $.ajax({
@@ -66,8 +47,8 @@ $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
                             url: 'log_watch.php',
                             data: {
                                 videoId: videoId,
-                                userId: "<?php echo $userAccount; ?>",
-                                userProfile: "<?php echo $userProfile; ?>"
+                                userId: userId,
+                                userProfile: userProfile
                             },
                             success: function(response) {
                                 console.log('Watch logged successfully');
@@ -77,15 +58,15 @@ $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
                             }
                         });
                     });
-                } else {
-                    console.error('Error fetching video details:', response.error);
-                }
-            },
-            error: function(error) {
-                console.error('Error fetching video details:', error.responseText);
-            }
-        });
-    });
-    </script>
-</body>
-</html>
+                });
+            </script>
+        </body>
+        </html>
+        <?php
+    } else {
+        echo "Video not found.";
+    }
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
