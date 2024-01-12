@@ -5,7 +5,6 @@ require 'vendor/autoload.php';
 $videoId = isset($_GET['_id']) ? $_GET['_id'] : null;
 $userAccount = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
-
 ?>
 
 <!DOCTYPE html>
@@ -19,25 +18,23 @@ $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
 </head>
 <body>
 
-
     <h1>Watch Video - MyFlix</h1>
 
-       <div id="videoDetailsContainer">
-            <?php
-           
-            if (isset($videoDetails['title'])) {
-                echo "<h2>{$videoDetails['title']}</h2>";
-            } else {
-                echo "<h2>Video Title Not Available</h2>";
-            }
+    <div id="videoDetailsContainer">
+        <?php
+        if (isset($videoDetails['title'])) {
+            echo "<h2>{$videoDetails['title']}</h2>";
+        } else {
+            echo "<h2>Video Title Not Available</h2>";
+        }
 
-            if (isset($videoDetails['description'])) {
-                echo "<p>{$videoDetails['description']}</p>";
-            } else {
-                echo "<p>Video Description Not Available</p>";
-            }
-            ?>
-        </div>
+        if (isset($videoDetails['description'])) {
+            echo "<p>{$videoDetails['description']}</p>";
+        } else {
+            echo "<p>Video Description Not Available</p>";
+        }
+        ?>
+    </div>
 
     <video id="watchVideo" controls>
         Your browser does not support the video tag.
@@ -45,9 +42,9 @@ $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
 
     <script>
     $(document).ready(function() {
-            var videoId = "<?php echo $videoId; ?>";
-            var userAccount = "<?php echo $userAccount; ?>";
-            var userProfile = "<?php echo $Profile; ?>";
+        var videoId = "<?php echo $videoId; ?>";
+        var userAccount = "<?php echo $userAccount; ?>";
+        var userProfile = "<?php echo $Profile; ?>";
 
         $.ajax({
             type: 'GET',
@@ -69,8 +66,8 @@ $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
                             url: 'log_watch.php',
                             data: {
                                 videoId: videoId,
-                                userId: "<?php echo $_SESSION['user_id']; ?>",
-                                userProfile: "<?php echo $_SESSION['userProfile']; ?>"
+                                userId: "<?php echo $userAccount; ?>",
+                                userProfile: "<?php echo $userProfile; ?>"
                             },
                             success: function(response) {
                                 console.log('Watch logged successfully');
@@ -89,6 +86,6 @@ $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
             }
         });
     });
-</script>
+    </script>
 </body>
 </html>
