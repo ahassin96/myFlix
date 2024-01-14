@@ -24,7 +24,7 @@ if ($response !== false) {
         $videoDescription = isset($videoDetails['video_details']['description']) ? $videoDetails['video_details']['description'] : 'Video Description Not Available';
         $videoUrl = isset($videoDetails['video_details']['url']) ? $videoDetails['video_details']['url'] : '';
         $videoTags = isset($videoDetails['video_details']['tags']) ? $videoDetails['video_details']['tags'] : [];
-
+        echo "tags are " . $videoTags;
     } else {
         echo "Error: Video details not found.";
     }
@@ -77,7 +77,7 @@ if ($response !== false) {
                         user_profile: userProfile,
                         video_id: videoId,
                         tags: videoTags
-                        
+
                     }),
                     success: function (data) {
                         console.log("Watched video recorded successfully:", data);
