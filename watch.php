@@ -1,5 +1,20 @@
 <?php
+require_once "connect.php";
+$conn = new DbConnect();
+$pdo = $conn->connect();
 session_start();
+
+echo  $_SESSION['user_id'];
+echo  $_SESSION['username'];
+if (isset($_GET['selectedProfile'])) {
+
+        
+        $_SESSION['userProfile'] = $_GET['selectedProfile'];
+        echo $_SESSION['userProfile'];
+    }
+
+
+
 require 'vendor/autoload.php';
 
 $videoId = isset($_GET['id']) ? $_GET['id'] : null;
