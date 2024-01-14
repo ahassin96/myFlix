@@ -3,6 +3,7 @@ session_start();
 require 'vendor/autoload.php';
 
 $videoId = isset($_GET['id']) ? $_GET['id'] : null;
+echo "video id is " . $videoId;
 $userAccount = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
 
