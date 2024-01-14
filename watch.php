@@ -21,6 +21,27 @@ $videoDetails = json_decode($videoDetailsJson, true);
 if ($videoDetails === NULL || !isset($videoDetails['title'], $videoDetails['description'], $videoDetails['url'])) {
     die('Error decoding video details JSON or missing expected keys');
 }
+
+$apiUrl = 'http://3.90.74.38:5000/watch/' . $videoId;
+$videoDetailsJson = file_get_contents($apiUrl);
+
+
+if ($videoDetailsJson === FALSE) {
+    die('Error fetching video details from the API');
+}
+
+
+var_dump($videoDetailsJson);
+
+$videoDetails = json_decode($videoDetailsJson, true);
+
+
+if ($videoDetails === NULL) {
+    die('Error decoding video details JSON: ' . json_last_error_msg());
+}
+if (!isset($videoDetails['title'], $videoDetails['description'], $videoDetails['url'])) {
+    die('Missing expected keys in the JSON response');
+}
 ?>
 
 <!DOCTYPE html>
