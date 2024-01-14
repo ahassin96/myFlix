@@ -1,21 +1,29 @@
 <?php
-
-
 session_start();
 require 'vendor/autoload.php';
 
-$videoTitle = isset($videoDetails['video_details']['title']) ? $videoDetails['video_details']['title'] : 'Video Title Not Available';
-$videoDescription = isset($videoDetails['video_details']['description']) ? $videoDetails['video_details']['description'] : 'Video Description Not Available';
-$videoUrl = isset($videoDetails['video_details']['url']) ? $videoDetails['video_details']['url'] : '';
+$videoId = isset($_GET['id']) ? $_GET['id'] : null;
+echo "video id is " . $videoId;
 
 $apiUrl = 'http://3.90.74.38:5000/watch/' . $videoId;
-$videoDetailsJson = file_get_contents($apiUrl);
-$videoDetails = json_decode($videoDetailsJson, true);
+$response = file_get_contents($apiUrl);
 
-var_dump($videoDetails); 
+if ($response !== false) {
+    $videoDetails = json_decode($response, true);
 
-$videoUrl = isset($videoDetails['url']) ? $videoDetails['url'] : '';
+    if (isset($videoDetails['video_details'])) {
+        $videoTitle = isset($videoDetails['video_details']['title']) ? $videoDetails['video_details']['title'] : 'Video Title Not Available';
+        $videoDescription = isset($videoDetails['video_details']['description']) ? $videoDetails['video_details']['description'] : 'Video Description Not Available';
+        $videoUrl = isset($videoDetails['video_details']['url']) ? $videoDetails['video_details']['url'] : '';
+
+    } else {
+        echo "Error: Video details not found.";
+    }
+} else {
+    echo "Error: Unable to fetch video details.";
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
