@@ -6,19 +6,14 @@ session_start();
 
 echo  $_SESSION['user_id'];
 echo  $_SESSION['username'];
-if (isset($_GET['selectedProfile'])) {
-
-        
-        $_SESSION['userProfile'] = $_GET['selectedProfile'];
-        echo $_SESSION['userProfile'];
-    }
+echo $_SESSION['userProfile'];
+  
 
 
 
 require 'vendor/autoload.php';
 
 $videoId = isset($_GET['id']) ? $_GET['id'] : null;
-echo "video id is " . $videoId;
 
 $apiUrl = 'http://3.90.74.38:5000/watch/' . $videoId;
 $response = file_get_contents($apiUrl);
