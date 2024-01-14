@@ -50,7 +50,7 @@ if (isset($_GET['selectedProfile'])) {
                     ?>
                     <div class="video">
                         <p><?php echo $video['title']; ?></p>
-                        <a href="watch.php?id=<?php echo $video['id']; ?>">Watch Details</a>
+                        <a href="watch.php?id=<?php echo $video['_id']; ?>">Watch Details</a>
 
                         <video controls>
                             <source src="<?php echo $video['url']; ?>" type="video/mp4">
