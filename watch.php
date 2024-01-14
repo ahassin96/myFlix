@@ -9,8 +9,6 @@ echo  $_SESSION['username'];
 echo $_SESSION['userProfile'];
   
 
-
-
 require 'vendor/autoload.php';
 
 $videoId = isset($_GET['id']) ? $_GET['id'] : null;
@@ -32,6 +30,8 @@ if ($response !== false) {
 } else {
     echo "Error: Unable to fetch video details.";
 }
+
+
 ?>
 
 
@@ -57,6 +57,34 @@ if ($response !== false) {
     <source src="<?php echo $videoUrl; ?>" type="video/mp4">
     Your browser does not support the video tag.
 </video>
+
+<script>
+        $(document).ready(function () {
+            $("#watchVideo").on("ended", function () {
+                
+                var videoId = "<?php echo $videoId; ?>";
+                var userId = "<?php echo $_SESSION['user_id']; ?>";
+                var userProfile = "<?php echo $_SESSION['userProfile']; ?>";
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://3.90.74.38:9091/watched",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        user_id: userId,
+                        user_profile: userProfile,
+                        video_id: videoId
+                    }),
+                    success: function (data) {
+                        console.log("Watched video recorded successfully:", data);
+                    },
+                    error: function (error) {
+                        console.error("Error recording watched video:", error);
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
