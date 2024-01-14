@@ -9,39 +9,7 @@ $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
 
 $apiUrl = 'http://3.90.74.38:5000/watch/' . $videoId;
 $videoDetailsJson = file_get_contents($apiUrl);
-
-
-if ($videoDetailsJson === FALSE) {
-    die('Error fetching video details from the API');
-}
-
 $videoDetails = json_decode($videoDetailsJson, true);
-
-
-if ($videoDetails === NULL || !isset($videoDetails['title'], $videoDetails['description'], $videoDetails['url'])) {
-    die('Error decoding video details JSON or missing expected keys');
-}
-
-$apiUrl = 'http://3.90.74.38:5000/watch/' . $videoId;
-$videoDetailsJson = file_get_contents($apiUrl);
-
-
-if ($videoDetailsJson === FALSE) {
-    die('Error fetching video details from the API');
-}
-
-
-var_dump($videoDetailsJson);
-
-$videoDetails = json_decode($videoDetailsJson, true);
-
-
-if ($videoDetails === NULL) {
-    die('Error decoding video details JSON: ' . json_last_error_msg());
-}
-if (!isset($videoDetails['title'], $videoDetails['description'], $videoDetails['url'])) {
-    die('Missing expected keys in the JSON response');
-}
 ?>
 
 <!DOCTYPE html>
@@ -58,12 +26,12 @@ if (!isset($videoDetails['title'], $videoDetails['description'], $videoDetails['
     <h1>Watch Video - MyFlix</h1>
 
     <div id="videoDetailsContainer">
-        <h2 id="videoTitle"><?php echo $videoDetails['title']; ?></h2>
-        <p id="videoDescription"><?php echo $videoDetails['description']; ?></p>
+        <h2 id="videoTitle"><?php echo isset($videoDetails['title']) ? $videoDetails['title'] : 'Video Title Not Available'; ?></h2>
+        <p id="videoDescription"><?php echo isset($videoDetails['description']) ? $videoDetails['description'] : 'Video Description Not Available'; ?></p>
     </div>
 
     <video id="watchVideo" controls>
-        <source src="<?php echo $videoDetails['url']; ?>" type="video/mp4">
+        <source src="<?php echo isset($videoDetails['url']) ? $videoDetails['url'] : ''; ?>" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
