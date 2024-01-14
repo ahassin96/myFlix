@@ -68,6 +68,8 @@ if ($response !== false) {
                 var userProfile = "<?php echo $_SESSION['userProfile']; ?>";
                 var videoTags = <?php echo json_encode($videoTags); ?>;
 
+                console.log("tags are:", videoTags);
+
                 $.ajax({
                     type: "POST",
                     url: "http://3.90.74.38:9091/watched",
