@@ -1,4 +1,6 @@
 <?php
+
+
 session_start();
 require 'vendor/autoload.php';
 
@@ -10,6 +12,10 @@ $Profile = isset($_SESSION['userProfile']) ? $_SESSION['userProfile'] : null;
 $apiUrl = 'http://3.90.74.38:5000/watch/' . $videoId;
 $videoDetailsJson = file_get_contents($apiUrl);
 $videoDetails = json_decode($videoDetailsJson, true);
+
+var_dump($videoDetails); 
+
+$videoUrl = isset($videoDetails['url']) ? $videoDetails['url'] : '';
 ?>
 
 <!DOCTYPE html>
