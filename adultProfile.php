@@ -35,7 +35,6 @@ if (isset($_GET['selectedProfile'])) {
 
 
     <?php
-   <?php
     try {
         foreach ($genres as $genre) {
             $flask_url = "http://3.90.74.38:9090/movies"; 
