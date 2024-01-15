@@ -63,7 +63,7 @@ if (isset($_GET['selectedProfile'])) {
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
-    ?>
+
 
     try {
         foreach ($genres as $genre) {
