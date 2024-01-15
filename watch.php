@@ -24,7 +24,7 @@ if ($response !== false) {
         $videoDescription = isset($videoDetails['video_details']['description']) ? $videoDetails['video_details']['description'] : 'Video Description Not Available';
         $videoUrl = isset($videoDetails['video_details']['url']) ? $videoDetails['video_details']['url'] : '';
         $videoTags = isset($videoDetails['video_details']['tags']) ? $videoDetails['video_details']['tags'] : [];
-        $videoUrl = isset($videoDetails['video_details']['url']) ? $videoDetails['video_details']['url'] : '';
+       
 
     } else {
         echo "Error: Video details not found.";
@@ -68,11 +68,11 @@ if ($response !== false) {
                 var userId = "<?php echo $_SESSION['user_id']; ?>";
                 var userProfile = "<?php echo $_SESSION['userProfile']; ?>";
                 var videoTags = <?php echo json_encode($videoTags); ?>;
-                var videoUrl = "<?php echo $videoUrl; ?>";
+               
 
 
                 console.log("tags are:", videoTags);
-                console.log("Video URL:", videoUrl);
+               
 
                 $.ajax({
                     type: "POST",
@@ -82,8 +82,8 @@ if ($response !== false) {
                         user_id: userId,
                         user_profile: userProfile,
                         video_id: videoId,
-                        video_tags: videoTags,
-                        video_url: videoUrl
+                        video_tags: videoTags
+                        
                     }),
                     success: function (data) {
                         console.log("Watched video recorded successfully:", data);
