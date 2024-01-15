@@ -10,15 +10,12 @@ $database = $mongoClient->admin;
 
 $genres = ['horror', 'military', 'action'];
 
-echo  $_SESSION['user_id'];
-echo  $_SESSION['username'];
+echo $_SESSION['user_id'];
+echo $_SESSION['username'];
 if (isset($_GET['selectedProfile'])) {
-
-        
-        $_SESSION['userProfile'] = $_GET['selectedProfile'];
-        echo $_SESSION['userProfile'];
-    }
-
+    $_SESSION['userProfile'] = $_GET['selectedProfile'];
+    echo $_SESSION['userProfile'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,10 +30,8 @@ if (isset($_GET['selectedProfile'])) {
 <body>
     <h1>MyFlix Video Library</h1>
 
-
     <?php
     try {
-        
         $user_id = $_SESSION['user_id'];
         $recommendations = get_recommendations($user_id);
 
@@ -48,16 +43,15 @@ if (isset($_GET['selectedProfile'])) {
                 foreach ($recommendations as $recommendation) {
                     ?>
                     <div class="video">
-
                         <p>Recommendation: <?php echo $recommendation['video_id']; ?></p>
-                        
                     </div>
                     <?php
                 }
                 ?>
             </div>
             <?php
-        }catch (Exception $e) {
+        }
+    } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
 
@@ -94,7 +88,5 @@ if (isset($_GET['selectedProfile'])) {
         echo "Error: " . $e->getMessage();
     }
     ?>
-
-
 </body>
 </html>
