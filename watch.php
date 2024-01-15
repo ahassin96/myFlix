@@ -74,12 +74,12 @@ if ($response !== false) {
                     type: "POST",
                     url: "http://3.90.74.38:9091/watched",
                     contentType: "application/json",
-                    data: {
+                    data: JSON.stringify({
                         user_id: userId,
                         user_profile: userProfile,
                         video_id: videoId,
                         video_tags: videoTags
-                    },
+                    }),
                     success: function (data) {
                         console.log("Watched video recorded successfully:", data);
                     },
