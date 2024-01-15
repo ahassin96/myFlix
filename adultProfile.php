@@ -35,6 +35,31 @@ if (isset($_GET['selectedProfile'])) {
 
 
     <?php
+     <?php
+    try {
+        
+        $user_id = $_SESSION['user_id'];
+        $recommendations = get_recommendations($user_id);
+
+        if (!empty($recommendations)) {
+            ?>
+            <div class="video-container" id="recommendations-container">
+                <h2>Recommendations</h2>
+                <?php
+                foreach ($recommendations as $recommendation) {
+                    ?>
+                    <div class="video">
+                        
+                        <p>Recommendation: <?php echo $recommendation['video_id']; ?></p>
+                        
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+            <?php
+        }
+
     try {
         foreach ($genres as $genre) {
             $flask_url = "http://3.90.74.38:9090/movies"; 
