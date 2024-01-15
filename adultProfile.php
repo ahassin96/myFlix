@@ -35,7 +35,6 @@ if (isset($_GET['selectedProfile'])) {
 
 
     <?php
-     <?php
     try {
         
         $user_id = $_SESSION['user_id'];
@@ -49,7 +48,7 @@ if (isset($_GET['selectedProfile'])) {
                 foreach ($recommendations as $recommendation) {
                     ?>
                     <div class="video">
-                        
+
                         <p>Recommendation: <?php echo $recommendation['video_id']; ?></p>
                         
                     </div>
