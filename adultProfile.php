@@ -36,7 +36,7 @@ if (isset($_GET['selectedProfile'])) {
     <?php
   
  try {
-    $flask_url = "http://44.206.41.240:9092/recommendations/" . $_SESSION['user_id'];
+    $flask_url = "http://3.90.74.38:9092/recommendations/" . $_SESSION['user_id'];
     $json_data = file_get_contents($flask_url);
     $recommendations = json_decode($json_data, true)['recommendations'];
     ?>
@@ -76,7 +76,7 @@ if (isset($_GET['selectedProfile'])) {
     try {
 
         foreach ($genres as $genre) {
-            $flask_url = "http://44.206.41.240:9090/movies"; 
+            $flask_url = "http://3.90.74.38:9090/movies"; 
             $json_data = file_get_contents($flask_url);
             $videos = json_decode($json_data, true)[$genre];
             ?>
