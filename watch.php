@@ -70,10 +70,13 @@ if ($response !== false) {
                 var userId = "<?php echo $_SESSION['user_id']; ?>";
                 var userProfile = "<?php echo $_SESSION['userProfile']; ?>";
                 var videoTags = <?php echo json_encode($videoTags); ?>;
-               
+                var videoUrl = "<?php echo $videoUrl; ?>";
 
-
-                console.log("tags are:", videoTags);
+                console.log("Video ID is:", videoId);
+                console.log("User ID is:", userId);
+                console.log("User Profile is:", userProfile);
+                console.log("Tags are:", videoTags);
+                console.log("Video URL is:", videoUrl);
                
 
                 $.ajax({
