@@ -24,6 +24,8 @@ if ($response !== false) {
         $videoDescription = isset($videoDetails['video_details']['description']) ? $videoDetails['video_details']['description'] : 'Video Description Not Available';
         $videoUrl = isset($videoDetails['video_details']['url']) ? $videoDetails['video_details']['url'] : '';
         $videoTags = isset($videoDetails['video_details']['tags']) ? $videoDetails['video_details']['tags'] : [];
+        $videoUrl = isset($videoDetails['video_details']['url']) ? $videoDetails['video_details']['url'] : '';
+
        
 
     } else {
