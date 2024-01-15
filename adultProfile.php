@@ -57,7 +57,9 @@ if (isset($_GET['selectedProfile'])) {
                 ?>
             </div>
             <?php
-        }
+        }catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
 
     try {
         foreach ($genres as $genre) {
