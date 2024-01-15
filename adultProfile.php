@@ -33,11 +33,10 @@ if (isset($_GET['selectedProfile'])) {
 <body>
     <h1>MyFlix Video Library</h1>
 
-
     <?php
   
     try {
-        foreach ($genres as $genre) {
+       
             $flask_url = "http://3.90.74.38:9092/recommendations/" . $_SESSION['user_id'];
             $json_data = file_get_contents($flask_url);
             $recommendations = json_decode($json_data, true)['recommendations'];
@@ -57,7 +56,7 @@ if (isset($_GET['selectedProfile'])) {
                 ?>
             </div>
             <?php
-        }
+        
 
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
