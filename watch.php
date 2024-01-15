@@ -82,7 +82,8 @@ if ($response !== false) {
                         user_id: userId,
                         user_profile: userProfile,
                         video_id: videoId,
-                        video_tags: videoTags
+                        video_tags: videoTags,
+                        video_url: videoUrl
                     }),
                     success: function (data) {
                         console.log("Watched video recorded successfully:", data);
