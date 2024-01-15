@@ -47,8 +47,6 @@ if (isset($_GET['selectedProfile'])) {
         foreach ($recommendations as $recommendation) {
             ?>
             <div class="video">
-                <p>Recommendation: <?php echo $recommendation['video_id']; ?></p>
-                <p>Tags: <?php echo implode(', ', $recommendation['tags']); ?></p>
                 
                 <?php
                 
@@ -61,7 +59,7 @@ if (isset($_GET['selectedProfile'])) {
                     <?php
                 } else {
                     ?>
-                    <p>No video available</p>
+                    <p>No Recommendations Available/p>
                     <?php
                 }
                 ?>
@@ -91,7 +89,8 @@ if (isset($_GET['selectedProfile'])) {
                     ?>
                     <div class="video">
                         <p><?php echo $video['title']; ?></p>
-                        <a href="watch.php?id=<?php echo $video['_id']; ?>">Watch Details</a>
+                        <a href="http://3.90.74.38:5000/watch/<?php echo $video['_id']; ?>">Watch Film</a>
+
 
                         <video controls>
                             <source src="<?php echo $video['url']; ?>" type="video/mp4">
