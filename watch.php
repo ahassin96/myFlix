@@ -23,6 +23,7 @@ if ($response !== false) {
         $videoTitle = isset($videoDetails['video_details']['title']) ? $videoDetails['video_details']['title'] : 'Video Title Not Available';
         $videoDescription = isset($videoDetails['video_details']['description']) ? $videoDetails['video_details']['description'] : 'Video Description Not Available';
         $videoUrl = isset($videoDetails['video_details']['url']) ? $videoDetails['video_details']['url'] : '';
+        $videoTags = isset($videoDetails['video_details']['tags']) ? $videoDetails['video_details']['tags'] : [];
 
     } else {
         echo "Error: Video details not found.";
@@ -65,6 +66,9 @@ if ($response !== false) {
                 var videoId = "<?php echo $videoId; ?>";
                 var userId = "<?php echo $_SESSION['user_id']; ?>";
                 var userProfile = "<?php echo $_SESSION['userProfile']; ?>";
+                var videoTags = <?php echo json_encode($videoTags); ?>;
+
+                console.log("tags are:", videoTags);
 
                 $.ajax({
                     type: "POST",
