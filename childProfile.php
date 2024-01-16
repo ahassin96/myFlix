@@ -10,16 +10,6 @@ $database = $mongoClient->admin;
 
 $genres = ['children'];
 
-echo  $_SESSION['user_id'];
-echo  $_SESSION['username'];
-if (isset($_GET['selectedProfile'])) {
-
-        
-        $_SESSION['userProfile'] = $_GET['selectedProfile'];
-        echo $_SESSION['userProfile'];
-    }
-
-
 ?>
 
 <!DOCTYPE html>
