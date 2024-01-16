@@ -25,8 +25,11 @@ $genres = ['children'];
 
     <?php
     try {
+
         foreach ($genres as $genre) {
-            $videos = $database->movies->find(['genre' => $genre]);
+            $flask_url = "http://3.90.74.38:9090/movies"; 
+            $json_data = file_get_contents($flask_url);
+            $videos = json_decode($json_data, true)[$genre];
             ?>
 
             <div class="video-container" id="<?php echo $genre; ?>-container">
@@ -37,12 +40,12 @@ $genres = ['children'];
                     ?>
                     <div class="video">
                         <p><?php echo $video['title']; ?></p>
-                        <a href="watch.php?id=<?php echo $video['_id']; ?>">Watch Details</a>
+                        <a href="watch.php?id=<?php echo $video['_id']; ?>">Watch Film</a>
+
                         <video controls>
                             <source src="<?php echo $video['url']; ?>" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                        
                     </div>
                     <?php
                 }
