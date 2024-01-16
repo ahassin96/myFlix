@@ -19,7 +19,6 @@ if (isset($_GET['selectedProfile'])) {
         echo $_SESSION['userProfile'];
     }
 
-?>
 
 ?>
 
