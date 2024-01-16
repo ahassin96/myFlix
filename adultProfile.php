@@ -45,8 +45,9 @@ if (isset($_GET['selectedProfile'])) {
     <h2>Recommendations</h2>
     <?php
     foreach ($recommendations as $recommendation) {
+        $video_id = $recommendation['video_id'];
         ?>
-        <a href="watch.php?id=<?php echo $recommendation['video_id']; ?>">Watch Film</a>
+        <a href="watch.php?id=<?php echo $video_id; ?>">Watch Film</a>
         <div class="video">
             <?php
             if ($recommendation['url']) {
