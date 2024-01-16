@@ -42,32 +42,31 @@ if (isset($_GET['selectedProfile'])) {
     ?>
 
     <div class="video-container" id="recommendations-container">
-        <h2>Recommendations</h2>
-        <?php
-        foreach ($recommendations as $recommendation) {
-            ?>
-            <div class="video">
-                
-                <?php
-                
-                if ($recommendation['url']) {
-                    ?>
-                    <video controls>
-                        <source src="<?php echo $recommendation['url']; ?>" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <?php
-                } else {
-                    ?>
-                    <p>No Recommendations Available/p>
-                    <?php
-                }
-                ?>
-            </div>
-            <?php
-        }
+    <h2>Recommendations</h2>
+    <?php
+    foreach ($recommendations as $recommendation) {
         ?>
-    </div>
+        <a href="watch.php?id=<?php echo $recommendation['_id']; ?>">Watch Film</a>
+        <div class="video">
+            <?php
+            if ($recommendation['url']) {
+                ?>
+                <video controls>
+                    <source src="<?php echo $recommendation['url']; ?>" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <?php
+            } else {
+                ?>
+                <p>No Recommendations Available</p>
+                <?php
+            }
+            ?>
+        </div>
+        <?php
+    }
+    ?>
+</div>
     <?php
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
